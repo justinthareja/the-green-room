@@ -1,0 +1,26 @@
+.SpotDetails {
+    max-width: 80%;
+    margin: 0 auto;
+
+    .header {
+      h3 {
+        display: inline-block;
+        margin-right: 20px;
+      }
+    } 
+
+    h1, h2 {
+      background-color: black;
+      color: white;
+      padding: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: slategrey;
+    }
+}
+
+.StarRating {
+  display: inline-block;
+}

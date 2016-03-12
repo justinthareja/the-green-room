@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Puerto Escondido",
+    "cover": "http://www.garage.com.au/media/17405/puerto-escondido-620x349.jpg",
+    "latitude": "15.8619",
+    "longitude": "-97.0672",
+    "id": 340,
+    "hashtags": ["zicatela", "mexipipe", "puertoescondido"]
+  },
+  {
+    "name": "Mullaghmore",
+    "cover": "https://i.ytimg.com/vi/MvshbveoUkI/maxresdefault.jpg",
+    "latitude":"54.4664",
+    "longitude":"-8.4486",
+    "id":1505,
+    "hashtags":["mullaghmore","wildatlanticway"]
+  },
+  {
+    "name":"Popoyo Outer Reef",
+    "cover":"http://cdn1.theinertia.com/wp-content/gallery/popoyo-outer-reef/jgl0899.jpg",
+    "latitude": "11.4731",
+    "longitude": "-86.1270",
+    "id": 939,
+    "hashtags": ["popoyo","magrock","magnificrock"]
+  },
+  {
+    "name":"Sunset",
+    "cover": "https://i.ytimg.com/vi/UFQefYUKwU8/maxresdefault.jpg",
+    "latitude":"21.6664",
+    "longitude":"-158.0553",
+    "id": 657,
+    "hashtags": ["northshore","oahu","sunsetbeach"]
+  },
+  {
+    "name": "The Box",
+    "cover": "http://a3.espncdn.com/photo/2013/0624/as_surf_chrisross_opener_2048.jpg",
+    "latitude":"-33.57524",
+    "longitude": "114.58673",
+    "id": 2873,
+    "hashtags": ["margiesriver"]
+  },
+  {
+    "name":"Cloudbreak",
+    "cover":"http://www.grindtv.com/wp-content/gallery/cloudbreak-photo-gallery/Cloudbreak140.JPG",
+    "latitude":"-17.53157",
+    "longitude":"177.11187",
+    "id": 669,
+    "hashtags": ["cloudbreak","tavarua","fijisurf"]
+  },
+  {
+    "name": "One Palm Point",
+    "cover":"http://www.surfline.com/travel/surfmaps/indian_ocean/indonesia/panaitan_island/humphrey_panaitan_one_palm.jpg",
+    "latitude":"-6.39324",
+    "longitude":"105.10358",
+    "id": 634,
+    "hashtags": ["indo","panaitan","secondthoughts","onepalm"]
+  },
+  {
+    "name":"Belharra",
+    "cover": "http://www.boylos.co.uk/blog/wp-content/uploads/2013/01/Europe-Surf-Belharra.jpg",
+    "latitude":"43.4036",
+    "longitude":"-1.7178",
+    "id": 1543,
+    "hashtags": ["belharra","basquecountry"]
+  },
+  {
+    "name":"Mundaka",
+    "cover":"http://i.cdn-surfline.com/surfnews/images/2011/12_december/bigswell_mundaka/full/004__004__6-mundaka--Fernando-Riego.jpg",
+    "latitude":"43.4072",
+    "longitude":"-2.6983",
+    "id": 169,
+    "hashtags": ["mundaka", "basquecountry"]
+  },
+  {
+    "name":"Wilderness",
+    "cover":"https://pbs.twimg.com/media/CYnDVZzWcAA81M8.jpg",
+    "latitude":"18.28572",
+    "longitude":"-67.10154",
+    "id": 2534,
+    "hashtags": ["wilderness", "wildernesspr"]
+  }
+]

@@ -1,0 +1,29 @@
+.ImageTile {
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    position: absolute;
+    color: white;
+    background-color: black;
+    opacity: .75;
+    padding-left: 5%;
+    padding-right: 5%;
+    bottom: 20%;
+    right: 3%;
+  }
+
+  h3 {
+    position: absolute;
+    color: white;
+    background-color: black;
+    opacity: .75;
+    padding-left: 5%;
+    padding-right: 5%;
+    bottom: 5%;
+    right: 3%;
+  }
+}

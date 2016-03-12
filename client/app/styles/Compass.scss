@@ -1,0 +1,97 @@
+$primary-width: 200px;
+$pointer-width: 5%;
+
+.Compass {
+  height: $primary-width;
+  width: $primary-width;
+  position: relative;
+  float: left;
+  margin: 0 20px 10px 0;
+  display: inline-block;
+
+  .container {
+
+    position: relative;
+    height: 100%;
+    width: auto;
+    border-radius: 50%; 
+    background-color: slategrey;
+
+    .pointer {
+      position: absolute;
+      width: $pointer-width;
+      height: $pointer-width * 7;
+      left: 50%;
+      margin-left: -$pointer-width / 2;
+      transition: transform 2s ease-in-out;
+      border-radius: 25%;
+      transform: rotate(0deg);
+    }
+    .untrue {
+      bottom: 50%;
+      background-color: white;
+      transform-origin: bottom;
+    }
+
+    .true {
+      top: 50%;
+      background-color: #FFC389;
+      transform-origin: top;
+    }
+
+    .center-node {
+      /* fixed height relative to parent container */
+      height: $pointer-width;
+      width: $pointer-width;
+      background-color: black;
+      border-radius: 50%;
+      
+      /* 
+        HOW-TO: vertical and horizontal center fixed width/height  
+        note: top, left, and margin percentages refer to the containing
+        block's height and width. 
+      */
+      position: absolute;
+      top: 50%; 
+      left: 50%; 
+      /* negative margins half the width and height of the element nudge back to center*/
+      margin-left: -$pointer-width / 2;
+      margin-top: -$pointer-width / 2;
+    }
+
+    .direction {
+      color: white;
+    }
+    .north {
+      /*
+        HOW-TO: vertical and horizontal center unknown width/height
+        transform!!!
+        translate percentages are based on current w/h of element
+      */
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 25%);
+    }
+
+    .south {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, -125%);
+    }
+
+    .west {
+      position: absolute;
+      top: 50%;
+      transform: translate(25%, -50%); 
+    }
+
+    .east {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translate(-125%, -50%);  
+    }
+  }
+
+}
