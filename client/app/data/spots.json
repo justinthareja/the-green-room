@@ -78,5 +78,13 @@
     "longitude":"-67.10154",
     "id": 2534,
     "hashtags": ["wilderness", "wildernesspr"]
+  },
+  {
+    "name": "Trestles",
+    "cover":"http://i.imgur.com/YuCnDhq.jpg",
+    "latitude": "33.382791",
+    "longitude": "-117.588687",
+    "id": 291,
+    "hashtags": ["trestles", "lowers"]
   }
 ]
