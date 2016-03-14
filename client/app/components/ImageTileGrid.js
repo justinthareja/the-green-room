@@ -31,12 +31,9 @@ export default class ImageTileGrid extends React.Component {
       <div className='ImageTileGrid'>
         {
           rows.map((row, i) => 
-            <ImageTileList key={i} spots={row} />)
+            <ImageTileList key={i + Math.random()} spots={row} />)
         }
       </div>
     )
   }
 }
-
-
-

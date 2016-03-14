@@ -47,7 +47,7 @@ const selectedSpotId = (state = null, action) => {
 //   prop: 'rating',
 //   order: 'ascending'
 // }
-const sortProp = (state = 'rating', action) => {
+const sortProp = (state = 'name', action) => {
   switch(action.type) {
     case SET_SORT_PROP:
       return action.prop
@@ -56,7 +56,7 @@ const sortProp = (state = 'rating', action) => {
   }
 }
 
-const sortOrder = (state = 'descending', action) => {
+const sortOrder = (state = 'ascending', action) => {
   switch(action.type) {
     case SET_SORT_ORDER:
       return action.order

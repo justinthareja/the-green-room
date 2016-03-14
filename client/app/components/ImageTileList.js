@@ -16,9 +16,8 @@ export default class ImageTileList extends React.Component {
       <div className="ImageTileList row clearfix">
         {
           spots.map(spot => 
-            <Link to={{ pathname: `/details/${spot.id}`}}>
+            <Link key={spot.cover + Math.random()} to={{ pathname: `/details/${spot.id}`}}>
               <ImageTile
-                key={spot.cover + Math.random()} 
                 image={spot.cover} 
                 title={spot.name} 
                 description={spot.rating}

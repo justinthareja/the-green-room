@@ -22,12 +22,12 @@ class SpotOverview extends React.Component {
         <div>
           <span>Sort by:</span>
           <Picker value={sortProp}
-            options={['rating', 'name']} 
+            options={['name', 'rating']} 
             onOptionSelect={handlePropChange} 
           />
           <span>Order:</span>
           <Picker value={sortOrder}
-            options={['descending', 'ascending']} 
+            options={['ascending', 'descending']} 
             onOptionSelect={handleOrderChange} 
           />
         </div>
@@ -37,11 +37,43 @@ class SpotOverview extends React.Component {
   }
 }
 
+
+const compare = (key, order, type) => {
+  const on = {
+    number(a, b) {
+      a = a[key]
+      b = b[key]
+      if (order === 'descending') {
+        return b - a
+      } else if (order === 'ascending') {
+        return a - b
+      } else {
+        throw new Error('invalid order for compare numbers')
+      }
+    },
+    string(a,b) {
+      a = a[key].toLowerCase()
+      b = b[key].toLowerCase()
+      if (order === 'descending') {
+        return b.localeCompare(a)
+      } else if (order === 'ascending') {
+        return a.localeCompare(b)
+      } else {
+        throw new Error('invalid order for compareStrings')
+      }
+    }
+  }
+
+  return on[type]
+}
+
+
 const mapStateToProps = (state) => {
   let { spots, sortProp, sortOrder } = state
 
-  spots = spots.sort((a, b) => 
-    sortOrder === 'descending' ? b[sortProp] > a[sortProp] : b[sortProp] < a[sortProp])
+  const propType = typeof spots[0][sortProp]
+
+  spots = spots.sort(compare(sortProp, sortOrder, propType))
 
   return {
     spots,
