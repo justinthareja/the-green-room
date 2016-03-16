@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 
-export default class Picker extends Component {
+class Picker extends Component {
 
   static propTypes = {
     options: PropTypes.arrayOf(
@@ -21,3 +21,5 @@ export default class Picker extends Component {
     )
   }
 }
+
+export default Picker

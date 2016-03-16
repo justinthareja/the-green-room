@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { setSortProp, setSortOrder, load } from '../actions/index'
 import Picker from './Picker'
 import ImageTileGrid from './ImageTileGrid'
 import '../styles/SpotOverview.scss'
 
-class SpotOverview extends React.Component {
+class SpotOverview extends Component {
+
+  static propTypes = {
+    initializeSpotData: PropTypes.func.isRequired,
+    handlePropChange: PropTypes.func.isRequired,
+    handleOrderChange: PropTypes.func.isRequired,
+    spots: PropTypes.shape({
+      cover: PropTypes.string.isRequired,
+      hashtags: PropTypes.array.isRequired,
+      id: PropTypes.number.isRequired,
+      latitude: PropTypes.string.isRequired,
+      longitude: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      rating: PropTypes.number
+    }).isRequired,
+    sortProp: PropTypes.string.isRequired,
+    sortOrder: PropTypes.string.isRequired
+  }
+
 
   componentWillMount() {
     this.props.initializeSpotData()
@@ -70,7 +88,7 @@ const compare = (key, order, type) => {
 
 const mapStateToProps = (state) => {
   let { spots, sortProp, sortOrder } = state
-
+  // TODO: shape the sort state properly
   const propType = typeof spots[0][sortProp]
 
   spots = spots.sort(compare(sortProp, sortOrder, propType))

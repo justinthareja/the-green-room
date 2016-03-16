@@ -1,20 +1,19 @@
 import $script from 'scriptjs'
+import fetch from 'isomorphic-fetch'
 
-const API_KEY = 'AIzaSyBoeoemBLlJl79N5EwuPW4fOxdtjUd8VNE'
-const API_URL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
-
-export default () => {
+const loadScript = (src) => {
   return new Promise((resolve, reject) => {
-    
-    if (!!window.google) {
-      return resolve()
-    }
-
-    $script(API_URL, () => {
+    $script(src, () => {
       resolve()
     }, (err) => {
       reject(err)
     })
   })
-  
 }
+
+const loadGoogleMaps = () => 
+  fetch('/gmaps')
+    .then(res => res.text())
+    .then(loadScript)
+
+export default loadGoogleMaps

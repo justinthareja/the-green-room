@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import SpotForecast from './SpotForecast'
 import SpotTweets from './SpotTweets'
 import GoogleMap from './GoogleMap'
@@ -10,7 +10,16 @@ import {
  } from '../actions/index'
  import '../styles/SpotDetails.scss'
 
-class SpotDetails extends React.Component {
+class SpotDetails extends Component {
+
+  static propTypes = {
+    spot: PropTypes.object.isRequired,
+    conditions: PropTypes.shape({
+      isFetching: PropTypes.bool.isRequired,
+      items: PropTypes.array.isRequired
+    }).isRequired,
+    tweets: PropTypes.array.isRequired
+  }
 
   componentWillMount() {
     const { params, dispatch } = this.props
@@ -64,7 +73,6 @@ class SpotDetails extends React.Component {
 const mapStateToProps = (state) => {
   const { spots, selectedSpotId, conditionsById, tweetsByHashtag } = state
   const spot = spots.filter(spot => spot.id === selectedSpotId)[0] || {}
-
 
   let tweets = spot.hashtags || []
 

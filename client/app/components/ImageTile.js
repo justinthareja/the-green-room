@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import '../styles/ImageTile.scss'
 
-export default class ImageTile extends React.Component {
+class ImageTile extends Component {
 
   static propTypes = {
-    image: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    description: React.PropTypes.number
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.number
   }
 
   render () {
@@ -20,3 +20,5 @@ export default class ImageTile extends React.Component {
     )
   }
 }
+
+export default ImageTile

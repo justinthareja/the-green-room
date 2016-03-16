@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import ImageTile from './ImageTile'
 import { Link } from 'react-router'
 
-export default class ImageTileList extends React.Component {
+class ImageTileList extends Component {
 
   static propTypes = {
-    spots: React.PropTypes.array.isRequired
+    spots: PropTypes.array.isRequired
   }
 
   render () {
@@ -30,3 +30,4 @@ export default class ImageTileList extends React.Component {
   }
 }
 
+export default ImageTileList

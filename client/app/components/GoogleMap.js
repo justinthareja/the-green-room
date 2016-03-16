@@ -1,15 +1,14 @@
-import React from 'react'
-import findDOMNode from 'react-dom'
+import React, { PropTypes, Component } from 'react'
 import loadMapsAPI from '../helpers/loadMapsApi'
 import '../styles/GoogleMap.scss'
 
-export default class GoogleMap extends React.Component {
+class GoogleMap extends Component {
 
   static propTypes = {
-    zoom: React.PropTypes.number.isRequired,
-    center: React.PropTypes.shape({
-      lat: React.PropTypes.number.isRequired,
-      lng: React.PropTypes.number.isRequired
+    zoom: PropTypes.number.isRequired,
+    center: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired
     }).isRequired,
     markerLabel: React.PropTypes.string
   }
@@ -47,3 +46,5 @@ export default class GoogleMap extends React.Component {
     )
   }
 }
+
+export default GoogleMap

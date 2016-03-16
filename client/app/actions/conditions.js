@@ -67,7 +67,7 @@ export const shouldFetchConditions = (state, spotId) => {
   } else if (conditions.isFetching) {
     return false
   } else {
-    new Date(conditions.lastUpdated) - new Date() > shelfLife
+    new Date() - new Date(conditions.lastUpdated) > shelfLife
   }
 
 }

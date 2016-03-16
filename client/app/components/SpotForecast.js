@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import getCurrent from '../helpers/getCurrentConditions'
 import StarRating from './StarRating'
 import Compass from './Compass'
 import '../styles/SpotForecast.scss'
 
-export default class SpotForecast extends React.Component {
+class SpotForecast extends Component {
 
   static propTypes = {
     conditions: PropTypes.arrayOf(PropTypes.shape({
@@ -74,3 +74,5 @@ export default class SpotForecast extends React.Component {
 
 
 }
+
+export default SpotForecast

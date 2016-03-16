@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import '../styles/Compass.scss'
 
-export default class Compass extends React.Component {
+class Compass extends Component {
 
   static propTypes = {
-    direction: React.PropTypes.number
+    direction: PropTypes.number
   }
 
 
@@ -41,3 +41,5 @@ export default class Compass extends React.Component {
   }
 
 }
+
+export default Compass

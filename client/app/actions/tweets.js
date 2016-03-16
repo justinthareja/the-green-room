@@ -61,7 +61,7 @@ export const shouldFetchTweets = (state, hashtag) => {
   } else if (tweets.isFetching) {
     return false
   } else {
-    return new Date(tweets.lastUpdated) - new Date() > shelfLife 
+    return new Date() - new Date(tweets.lastUpdated) > shelfLife 
   }
 
 }

@@ -1,10 +1,10 @@
-import React from 'react' 
+import React, { PropTypes, Component } from 'react' 
 import ImageTileList from './ImageTileList'
 
-export default class ImageTileGrid extends React.Component {
+class ImageTileGrid extends Component {
 
   static propTypes = {
-    spots: React.PropTypes.array.isRequired
+    spots: PropTypes.array.isRequired
   }
 
   createRows(array, length) {
@@ -37,3 +37,5 @@ export default class ImageTileGrid extends React.Component {
     )
   }
 }
+
+export default ImageTileGrid
