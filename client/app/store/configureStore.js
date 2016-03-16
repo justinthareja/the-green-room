@@ -11,7 +11,7 @@ export default () => {
   const store = createStore(
     rootReducer,
     applyMiddleware(
-      // loggerMiddleware, 
+      loggerMiddleware, 
       thunkMiddleware
     )
   )

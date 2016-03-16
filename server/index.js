@@ -4,7 +4,6 @@ import router from './router'
 
 const app = express()
 
-
 const isProduction = process.env.NODE_ENV === 'production'
 const port = isProduction ? process.env.PORT : 1337
 const publicPath = path.join(__dirname, '/../client/build')

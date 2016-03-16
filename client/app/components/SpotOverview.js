@@ -1,9 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { setSortProp, setSortOrder, load } from '../actions/index'
 import Picker from './Picker'
 import ImageTileGrid from './ImageTileGrid'
 import '../styles/SpotOverview.scss'
+import { 
+  setSortProp, 
+  setSortOrder, 
+  load,
+  selectSpot
+} from '../actions/index'
 
 class SpotOverview extends Component {
 
@@ -11,7 +16,7 @@ class SpotOverview extends Component {
     initializeSpotData: PropTypes.func.isRequired,
     handlePropChange: PropTypes.func.isRequired,
     handleOrderChange: PropTypes.func.isRequired,
-    spots: PropTypes.shape({
+    spots: PropTypes.arrayOf(PropTypes.shape({
       cover: PropTypes.string.isRequired,
       hashtags: PropTypes.array.isRequired,
       id: PropTypes.number.isRequired,
@@ -19,13 +24,14 @@ class SpotOverview extends Component {
       longitude: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       rating: PropTypes.number
-    }).isRequired,
+    }).isRequired).isRequired,
     sortProp: PropTypes.string.isRequired,
     sortOrder: PropTypes.string.isRequired
   }
 
 
   componentWillMount() {
+    this.props.resetSelectedSpot()
     this.props.initializeSpotData()
   }
 
@@ -110,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     initializeSpotData() {
       dispatch(load())
+    },
+    resetSelectedSpot() {
+      dispatch(selectSpot(null))
     }
   }
 }

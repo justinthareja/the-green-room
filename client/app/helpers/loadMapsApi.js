@@ -11,9 +11,13 @@ const loadScript = (src) => {
   })
 }
 
-const loadGoogleMaps = () => 
-  fetch('/gmaps')
+const loadGoogleMaps = () => {
+  if (window.google) {
+    return Promise.resolve()
+  }
+  return fetch('/gmaps')
     .then(res => res.text())
     .then(loadScript)
+}
 
 export default loadGoogleMaps
