@@ -1,17 +1,11 @@
-import fetch from 'isomorphic-fetch'
+import { CALL_API } from '../middleware/api'
 
 export const REQUEST_CONDITIONS = 'REQUEST_CONDITIONS'
 export const RECEIVE_CONDITIONS = 'RECEIVE_CONDITIONS'
+export const FAILED_CONDITIONS = 'FAILED_CONDITIONS'
 
-export const requestConditions = (spotId) => {
-  return {
-    type: REQUEST_CONDITIONS,
-    spotId,
-  }
-}
-
-export const receiveConditions = (spotId, json) => {
-  json = json.map(forecast => ({
+const mapConditions = (json) => 
+  json.map(forecast => ({
     swellHeight: forecast.swell.components.combined.height,
     swellPeriod: forecast.swell.components.combined.period,
     swellDirection: forecast.swell.components.combined.direction,
@@ -26,36 +20,22 @@ export const receiveConditions = (spotId, json) => {
     solidRating: forecast.solidRating
   }))
 
-  return {
-    type: RECEIVE_CONDITIONS,
-    spotId,
-    conditions: json,
-    receivedAt: Date.now()
-  }
-}
-
 export const fetchConditions = (spotId) => {
 
-  const url = `/conditions/${spotId}`
-  
-  return (dispatch) => {
-
-    dispatch(requestConditions(spotId))
-
-    return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('bad response from the msw server')
-        }
-        return response.json()
-      })
-      .then(json => {
-        dispatch(receiveConditions(spotId, json))
-      })
-      .catch(err => {
-        throw new Error('error fetching msw data', err.message)
-      })
+  return {
+    reducerOptions: {
+      spotId
+    },
+    [CALL_API]: {
+      options: {
+        method: 'GET',
+        endpoint: `/conditions/${spotId}`
+      },
+      types: [REQUEST_CONDITIONS, RECEIVE_CONDITIONS, FAILED_CONDITIONS],
+      onSuccess: mapConditions
+    }
   }
+
 }
 
 export const shouldFetchConditions = (state, spotId) => {
@@ -67,7 +47,7 @@ export const shouldFetchConditions = (state, spotId) => {
   } else if (conditions.isFetching) {
     return false
   } else {
-    new Date() - new Date(conditions.lastUpdated) > shelfLife
+    return (new Date() - new Date(conditions.lastUpdated)) > shelfLife
   }
 
 }

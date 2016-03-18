@@ -1,6 +1,12 @@
 import { fetchConditionsIfNeeded } from './conditions'
 import { fetchTweetsIfNeeded, fetchAllSpotTweets } from './tweets'
-import { selectSpot, calculateActivityRating, setSortProp, setSortOrder } from './spots'
+import { 
+  selectSpot, 
+  calculateActivityRating, 
+  setSortProp, 
+  setSortOrder, 
+  setVisibilityFilter 
+} from './spots'
 
 const load = () => {
   return (dispatch, getState) => {
@@ -25,7 +31,10 @@ export {
   selectSpot,
   setSortProp,
   setSortOrder,
+  setVisibilityFilter,
   fetchConditionsIfNeeded, 
   fetchTweetsIfNeeded,
   fetchAllSpotTweets
 }
+
+export { loginUser } from './user'

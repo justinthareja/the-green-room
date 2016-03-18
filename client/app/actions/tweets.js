@@ -1,55 +1,34 @@
-import fetch from 'isomorphic-fetch'
+import { CALL_API } from '../middleware/api'
 import Promise from 'bluebird'
 
 export const REQUEST_TWEETS = 'REQUEST_TWEETS'
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
+export const FAILED_TWEETS = 'FAILED_TWEETS'
 
-export const requestTweets = (hashtag) => {
-  return {
-    type: REQUEST_TWEETS,
-    hashtag
-  }
-}
-
-export const receiveTweets = (hashtag, json) => {
-
-  json = json.statuses.map(status => ({
+const mapTweets = (json) => 
+  json.statuses.map(status => ({
     text: status.text,
     user: status.user.screen_name,
     createdAt: status.created_at,
     id: status.id
   }))
 
-  return {
-    type: RECEIVE_TWEETS,
-    hashtag,
-    tweets: json,
-    receivedAt: Date.now()
-  }
-}
-
 export const fetchTweets = (hashtag) => {
 
-  const url = `/tweets/${hashtag}`
-
-  return (dispatch) => {
-
-    dispatch(requestTweets(hashtag))
-
-    return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error ('Error fetching from twitter api')
-        }
-        return response.json()
-      })
-      .then(json => {
-        return dispatch(receiveTweets(hashtag, json))
-      })
-      .catch(err => {
-        throw new Error('error fetching tweets' + err.message)
-      })
+  return {
+    [CALL_API]: {
+      options: {
+        method: 'GET',
+        endpoint: `/tweets/${hashtag}`
+      },
+      types: [REQUEST_TWEETS, RECEIVE_TWEETS, FAILED_TWEETS],
+      onSuccess: mapTweets
+    },
+    reducerOptions: {
+      hashtag
+    }
   }
+    
 }
 
 export const shouldFetchTweets = (state, hashtag) => {

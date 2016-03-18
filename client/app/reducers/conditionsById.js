@@ -4,9 +4,13 @@ const conditionsById = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_CONDITIONS:
     case REQUEST_CONDITIONS:
-      let nextState = {}
-      nextState[action.spotId] = conditions(state[action.spotId], action) 
-      return Object.assign({}, state, nextState)
+      const { spotId } = action.options 
+      return {
+        ...state,
+        ...{
+          [spotId]: conditions(state[spotId], action)
+        }
+      }
     default:
       return state
   }
@@ -18,15 +22,31 @@ const conditions = (state = {
 }, action) => {
   switch (action.type) {
     case REQUEST_CONDITIONS:
-      return Object.assign({}, state, {
-        isFetching: true
-      })
+      return {
+        ...state,
+        ...{ 
+          isFetching: true,
+          items: [] 
+        }
+      }
     case RECEIVE_CONDITIONS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        items: action.conditions,
-        lastUpdated: action.receivedAt
-      })
+      return {
+        ...state,
+        ...{
+          isFetching: false,
+          items: action.response,
+          lastUpdated: action.receivedAt
+        }
+      }
+    case FAILED_CONDITIONS:
+      return {
+        ...state,
+        ...{
+          isFetching: false,
+          items: [],
+          errorMessage: action.error
+        }
+      }
     default:
       return state
   }

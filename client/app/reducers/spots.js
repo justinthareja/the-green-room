@@ -4,7 +4,8 @@ import {
   UPDATE_ACTIVITY_METRIC, 
   SELECT_SPOT,
   SET_SORT_PROP,
-  SET_SORT_ORDER
+  SET_SORT_ORDER,
+  SET_VISIBILITY_FILTER
 } from '../actions/spots'
 
 const spots = (state = defaultSpots, action) => {
@@ -26,7 +27,9 @@ const spot = (state = {}, action) => {
     case UPDATE_ACTIVITY_METRIC:
       return {
         ...state,
-        ...{ rating: action.rating }
+        ...{ 
+          rating: action.rating 
+        }
       }
     default: 
       return state
@@ -65,10 +68,20 @@ const sortOrder = (state = 'ascending', action) => {
   }
 }
 
+const visibilityFilter = (state = '', action) => {
+  switch(action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+
 export default {
   spots,
   selectedSpotId,
   sortProp,
-  sortOrder
+  sortOrder,
+  visibilityFilter
 }
 

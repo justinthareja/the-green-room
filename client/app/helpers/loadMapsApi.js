@@ -15,9 +15,9 @@ const loadGoogleMaps = () => {
   if (window.google) {
     return Promise.resolve()
   }
-  return fetch('/gmaps')
-    .then(res => res.text())
-    .then(loadScript)
+  return fetch('/api/gmaps')
+    .then(res => res.json())
+    .then(res => loadScript(res.url))
 }
 
 export default loadGoogleMaps

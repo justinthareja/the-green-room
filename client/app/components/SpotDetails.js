@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import { 
   fetchAllSpotTweets, 
   fetchConditionsIfNeeded,
-  selectSpot
+  selectSpot,
+  loginUser
  } from '../actions/index'
  import '../styles/SpotDetails.scss'
 
@@ -25,6 +26,10 @@ class SpotDetails extends Component {
     const { params, dispatch } = this.props
     const spotId = parseInt(params.spotId)
 
+    dispatch(loginUser({
+      username: 'bowl',
+      password: 'password'
+    }))
     dispatch(selectSpot(spotId))
     dispatch(fetchConditionsIfNeeded(spotId))
     dispatch(fetchAllSpotTweets(spotId))

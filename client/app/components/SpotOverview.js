@@ -2,12 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Picker from './Picker'
 import ImageTileGrid from './ImageTileGrid'
+import SearchBar from './SearchBar'
 import '../styles/SpotOverview.scss'
 import { 
   setSortProp, 
   setSortOrder, 
   load,
-  selectSpot
+  selectSpot,
+  setVisibilityFilter
 } from '../actions/index'
 
 class SpotOverview extends Component {
@@ -32,12 +34,13 @@ class SpotOverview extends Component {
 
   componentWillMount() {
     this.props.resetSelectedSpot()
+    this.props.resetVisibilityFilter()
     this.props.initializeSpotData()
   }
 
   render () {
     const { 
-      handlePropChange, handleOrderChange, 
+      handlePropChange, handleOrderChange, handleSearchInput,
       spots, sortProp, sortOrder 
     } = this.props
    
@@ -54,6 +57,7 @@ class SpotOverview extends Component {
             options={['ascending', 'descending']} 
             onOptionSelect={handleOrderChange} 
           />
+        <SearchBar onUserInput={handleSearchInput}/>
         </div>
         <ImageTileGrid spots={spots} />
       </div>
@@ -91,13 +95,21 @@ const compare = (key, order, type) => {
   return on[type]
 }
 
+const getVisibleSpots = (spots, search) => {
+  search = search.toLowerCase()
+  return spots.filter(spot =>
+    spot.name.toLowerCase().startsWith(search))
+}
 
 const mapStateToProps = (state) => {
-  let { spots, sortProp, sortOrder } = state
+  let { spots, sortProp, sortOrder, visibilityFilter } = state
   // TODO: shape the sort state properly
   const propType = typeof spots[0][sortProp]
 
+  // update the sort of the spots
   spots = spots.sort(compare(sortProp, sortOrder, propType))
+  // apply any filter to the spots if necessary
+  spots = getVisibleSpots(spots, visibilityFilter)
 
   return {
     spots,
@@ -119,6 +131,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetSelectedSpot() {
       dispatch(selectSpot(null))
+    },
+    handleSearchInput(value) {
+      dispatch(setVisibilityFilter(value))
+    },
+    resetVisibilityFilter() {
+      dispatch(setVisibilityFilter(''))
     }
   }
 }
