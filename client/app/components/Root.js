@@ -15,7 +15,7 @@ class Root extends Component {
       <Provider store={store}>
         <Router history={hashHistory}>
           <Route path='/' component={SpotOverview} />
-          <Route path='/details/:spotId' component={SpotDetails} />
+          <Route path='/details/:spotId' component={SpotDetails} onEnter={requireAuth}/>
         </Router>
       </Provider>
     )
@@ -23,5 +23,15 @@ class Root extends Component {
 
 }
 
+const requireAuth = (nextState, replace) => {
+  if (!store.getState().user.isAuthenticated) {
+    replace({
+      pathname: '/',
+      state: {
+        nextPathname: nextState.location.pathname
+      }
+    })
+  }
+}
 
 export default Root

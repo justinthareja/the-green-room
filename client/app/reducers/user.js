@@ -20,15 +20,16 @@ const user = (state = {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        ...action.response,
+        ...action.response.user,
         ...{
           isFetching: false,
-          isAuthenticated: true
+          isAuthenticated: true,
+          token: action.response.token
         }
       }
     case LOGIN_FAILURE:
       return {
-        ...stat,
+        ...state,
         ...{
           isFetching: false,
           isAuthenticated: false,

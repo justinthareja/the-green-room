@@ -9,7 +9,8 @@ import {
   setSortOrder, 
   load,
   selectSpot,
-  setVisibilityFilter
+  setVisibilityFilter,
+  loginUser
 } from '../actions/index'
 
 class SpotOverview extends Component {
@@ -40,7 +41,7 @@ class SpotOverview extends Component {
 
   render () {
     const { 
-      handlePropChange, handleOrderChange, handleSearchInput,
+      handlePropChange, handleOrderChange, handleSearchInput, login,
       spots, sortProp, sortOrder 
     } = this.props
    
@@ -58,6 +59,7 @@ class SpotOverview extends Component {
             onOptionSelect={handleOrderChange} 
           />
         <SearchBar onUserInput={handleSearchInput}/>
+        <button onClick={() => login({ username: 'justin', password: 'password'})}>login</button>
         </div>
         <ImageTileGrid spots={spots} />
       </div>
@@ -137,6 +139,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetVisibilityFilter() {
       dispatch(setVisibilityFilter(''))
+    },
+    login(credentials) {
+      dispatch(loginUser(credentials))
     }
   }
 }
