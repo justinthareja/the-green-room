@@ -4,8 +4,7 @@ import morgan from 'morgan'
 import path from 'path'
 import router from './router'
 import mongoose from 'mongoose'
-import handleError from './middleware/handleError'
-import { DB_URI, JWT_SECRET } from './config'
+import { DB_URI } from './config'
 
 const app = express()
 
@@ -27,7 +26,7 @@ app.use(morgan('dev'));
 app.use('/api', router)
 
 // default error-handling middleware
-app.use(handleError)
+app.use((err, req, res, next) => res.status(400).send({ error: err.message }))
 
 // connect to mongoose database
 mongoose.connect(DB_URI)

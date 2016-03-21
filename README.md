@@ -73,5 +73,3 @@ A Proxy was built around Twitter's Application-Only-Authentication limitation, w
 - Could compose my reducers a bit smarter, reducing code duplication
 - Browser history is not synced with store, unnoticable with the current feature set but would become a problem if this grows
 
-
-
