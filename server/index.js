@@ -26,7 +26,8 @@ app.use(morgan('dev'));
 app.use('/api', router)
 
 // default error-handling middleware
-app.use((err, req, res, next) => res.status(400).send({ error: err.message }))
+app.use((err, req, res, next) => 
+  res.status(400).send({ error: err.message }))
 
 // connect to mongoose database
 mongoose.connect(DB_URI)

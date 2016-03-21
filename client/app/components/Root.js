@@ -4,6 +4,7 @@ import { Router, Route, hashHistory } from 'react-router'
 import configureStore from '../store/configureStore'
 import SpotOverview from './SpotOverview'
 import SpotDetails from './SpotDetails'
+import { updateUserError } from '../actions/index'
 import '../styles/main.scss'
 
 const store = configureStore()
@@ -25,11 +26,11 @@ class Root extends Component {
 
 const requireAuth = (nextState, replace) => {
   if (!store.getState().user.isAuthenticated) {
+    store.dispatch(updateUserError('Please log in before viewing premium content'))
     replace({
       pathname: '/',
       state: {
-        nextPathname: nextState.location.pathname,
-        authFailed: true
+        nextPathname: nextState.location.pathname
       }
     })
   }

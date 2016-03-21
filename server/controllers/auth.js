@@ -24,7 +24,7 @@ export const handleLogin = (req, res, next) => {
         throw new Error('invalid password')
       }
       const token = jwt.sign(user, JWT_SECRET, {
-        expiresInMinutes: 10
+        expiresIn: 600 // seconds
       })
       res.json({
         token: token

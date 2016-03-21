@@ -10,7 +10,8 @@ import {
   load,
   selectSpot,
   setVisibilityFilter,
-  loginUser
+  loginUser,
+  logoutUser
 } from '../actions/index'
 
 class SpotOverview extends Component {
@@ -41,8 +42,8 @@ class SpotOverview extends Component {
 
   render () {
     const { 
-      handlePropChange, handleOrderChange, handleSearchInput, login,
-      spots, sortProp, sortOrder 
+      handlePropChange, handleOrderChange, handleSearchInput, login, logout,
+      spots, sortProp, sortOrder, user
     } = this.props
     
     return (
@@ -59,7 +60,14 @@ class SpotOverview extends Component {
             onOptionSelect={handleOrderChange} 
           />
         <SearchBar onUserInput={handleSearchInput}/>
-        <button onClick={() => login({ username: 'justin', password: 'password'})}>login</button>
+        <button onClick={() => login({ 
+          email: 'justin@gmail.com', 
+          password: 'password'
+        })}>login</button>
+        <button onClick={() => logout()}>logout</button>
+        {user.message &&
+          <div className='error'>{user.message}</div>
+        }
         </div>
         <ImageTileGrid spots={spots} />
       </div>
@@ -104,7 +112,7 @@ const getVisibleSpots = (spots, search) => {
 }
 
 const mapStateToProps = (state) => {
-  let { spots, sortProp, sortOrder, visibilityFilter } = state
+  let { spots, sortProp, sortOrder, visibilityFilter, user } = state
   // TODO: shape the sort state properly
   const propType = typeof spots[0][sortProp]
 
@@ -114,6 +122,7 @@ const mapStateToProps = (state) => {
   spots = getVisibleSpots(spots, visibilityFilter)
 
   return {
+    user,
     spots,
     sortProp,
     sortOrder
@@ -142,6 +151,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     login(credentials) {
       dispatch(loginUser(credentials))
+    },
+    logout() {
+      dispatch(logoutUser())
     }
   }
 }

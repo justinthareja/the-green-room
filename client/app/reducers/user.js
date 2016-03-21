@@ -1,5 +1,6 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
+  LOGOUT_SUCCESS, LOGOUT_FAILURE, SET_USER_ERROR
 } from '../actions/user'
 
 
@@ -7,7 +8,8 @@ import {
 const user = (state = {
   isFetching: false,
   isAuthenticated: !!localStorage.getItem('token'),
-  token: localStorage.getItem('token') 
+  token: localStorage.getItem('token') || null,
+  message: ""
 }, action) => {
   switch(action.type) {
     case LOGIN_REQUEST: 
@@ -21,11 +23,11 @@ const user = (state = {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        ...action.response.user,
         ...{
           isFetching: false,
           isAuthenticated: true,
-          token: action.response.token
+          token: action.payload.token,
+          message: "successfully logged in"
         }
       }
     case LOGIN_FAILURE:
@@ -34,8 +36,28 @@ const user = (state = {
         ...{
           isFetching: false,
           isAuthenticated: false,
-          errorMessage: action.error
+          message: action.payload.response.error
         }
+      }
+    case SET_USER_ERROR:
+      return {
+        ...state,
+        ...{
+          message: action.error
+        }
+      }
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+        message: 'Successfully logged out'
+      }
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isAuthenticated: false,
+        message: action.error
       }
     default:
       return state

@@ -44,7 +44,7 @@ const conditions = (state = {
         ...{
           isFetching: false,
           items: [],
-          errorMessage: action.error
+          error: action.payload.message
         }
       }
     default:
