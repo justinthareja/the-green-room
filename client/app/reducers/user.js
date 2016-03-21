@@ -6,7 +6,8 @@ import {
 // TODO: add utility for expiration
 const user = (state = {
   isFetching: false,
-  isAuthenticated: !!localStorage.getItem('token') 
+  isAuthenticated: !!localStorage.getItem('token'),
+  token: localStorage.getItem('token') 
 }, action) => {
   switch(action.type) {
     case LOGIN_REQUEST: 

@@ -28,7 +28,8 @@ const requireAuth = (nextState, replace) => {
     replace({
       pathname: '/',
       state: {
-        nextPathname: nextState.location.pathname
+        nextPathname: nextState.location.pathname,
+        authFailed: true
       }
     })
   }

@@ -1,4 +1,4 @@
-import { CALL_API } from '../middleware/api'
+import { CALL_API, getJSON } from 'redux-api-middleware'
 import Promise from 'bluebird'
 
 export const REQUEST_TWEETS = 'REQUEST_TWEETS'
@@ -13,19 +13,31 @@ const mapTweets = (json) =>
     id: status.id
   }))
 
+
 export const fetchTweets = (hashtag) => {
 
   return {
     [CALL_API]: {
-      options: {
-        method: 'GET',
-        endpoint: `/tweets/${hashtag}`
-      },
-      types: [REQUEST_TWEETS, RECEIVE_TWEETS, FAILED_TWEETS],
-      onSuccess: mapTweets
-    },
-    reducerOptions: {
-      hashtag
+      method: 'GET',
+      endpoint: `/api/tweets/${hashtag}`,
+      types: [
+        {
+          type: REQUEST_TWEETS,
+          payload: { hashtag }
+        },
+        {
+          type: RECEIVE_TWEETS,
+          payload: async (action, state, res) => {
+            const json = await getJSON(res)
+
+            return {
+              hashtag,
+              tweets: mapTweets(json)
+            }
+          }
+        },
+        FAILED_TWEETS 
+      ]
     }
   }
     

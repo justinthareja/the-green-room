@@ -4,7 +4,7 @@ const tweetsByHashtag = (state = {}, action) => {
   switch(action.type) {
     case REQUEST_TWEETS:
     case RECEIVE_TWEETS:
-    const { hashtag } = action.options
+      const { hashtag } = action.payload
       let nextState = {}
       nextState[hashtag] = tweets(state[hashtag] , action)
       return {
@@ -34,8 +34,8 @@ const tweets = (state = {
         ...state, 
         ...{
           isFetching: false,
-          items: action.response,
-          lastUpdated: action.receivedAt
+          items: action.payload.tweets,
+          lastUpdated: new Date()
         }
       }
     default:

@@ -1,4 +1,4 @@
-import { CALL_API } from '../middleware/api'
+import { CALL_API, getJSON } from 'redux-api-middleware'
 
 export const REQUEST_CONDITIONS = 'REQUEST_CONDITIONS'
 export const RECEIVE_CONDITIONS = 'RECEIVE_CONDITIONS'
@@ -20,19 +20,30 @@ const mapConditions = (json) =>
     solidRating: forecast.solidRating
   }))
 
+
 export const fetchConditions = (spotId) => {
 
   return {
-    reducerOptions: {
-      spotId
-    },
     [CALL_API]: {
-      options: {
-        method: 'GET',
-        endpoint: `/conditions/${spotId}`
-      },
-      types: [REQUEST_CONDITIONS, RECEIVE_CONDITIONS, FAILED_CONDITIONS],
-      onSuccess: mapConditions
+      method: 'GET',
+      endpoint: `/api/conditions/${spotId}`,
+      types: [
+        {
+          type: REQUEST_CONDITIONS,
+          payload: { spotId }
+        },
+        {
+          type: RECEIVE_CONDITIONS,
+          payload: async (action, state, res) => {
+            const json = await getJSON(res)
+            return {
+              conditions: mapConditions(json),
+              spotId
+            }
+          }
+        },
+        FAILED_CONDITIONS
+      ],
     }
   }
 

@@ -44,7 +44,7 @@ class SpotOverview extends Component {
       handlePropChange, handleOrderChange, handleSearchInput, login,
       spots, sortProp, sortOrder 
     } = this.props
-   
+    
     return (
       <div className='SpotOverview'>
         <div>

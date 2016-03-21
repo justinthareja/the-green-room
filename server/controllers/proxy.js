@@ -8,7 +8,7 @@ import {
 
 promisifyAll(request)
 
-export const generateGoogleMapsUrl = (req, res) => {
+export const sendGoogleMapsUrl = (req, res) => {
   const url = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`
   res.json({ url })
 }
@@ -30,7 +30,7 @@ export const sendTweets = (req, res, next) => {
 
   const url = 'https://api.twitter.com/1.1/search/tweets.json?'
   
-  request.getAsync({
+  return request.getAsync({
     url: url,
     qs: {
       q: `#${req.params.hashtag}`

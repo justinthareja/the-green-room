@@ -1,10 +1,10 @@
-import { REQUEST_CONDITIONS, RECEIVE_CONDITIONS } from '../actions/conditions'
+import { REQUEST_CONDITIONS, RECEIVE_CONDITIONS, FAILED_CONDITIONS } from '../actions/conditions'
 
 const conditionsById = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_CONDITIONS:
-    case REQUEST_CONDITIONS:
-      const { spotId } = action.options 
+    case REQUEST_CONDITIONS: 
+    const { spotId } = action.payload
       return {
         ...state,
         ...{
@@ -34,8 +34,8 @@ const conditions = (state = {
         ...state,
         ...{
           isFetching: false,
-          items: action.response,
-          lastUpdated: action.receivedAt
+          items: action.payload.conditions,
+          lastUpdated: new Date()
         }
       }
     case FAILED_CONDITIONS:

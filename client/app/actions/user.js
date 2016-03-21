@@ -2,7 +2,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
-import { CALL_API } from '../middleware/api'
+import { CALL_API, getJSON } from 'redux-api-middleware'
 
 export const cacheToken = (response) => {
   localStorage.setItem('token', response.token)
@@ -11,13 +11,14 @@ export const cacheToken = (response) => {
 
 export const loginUser = (credentials) => ({
   [CALL_API]: {
-    options: {
-      method: 'POST',
-      body: credentials,
-      endpoint: '/login'
-    },
-    types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
-    onSuccess: cacheToken
+    method: 'POST',
+    body: credentials,
+    endpoint: '/api/login',
+    types: [
+      LOGIN_REQUEST, 
+      LOGIN_SUCCESS, 
+      LOGIN_FAILURE
+    ]
   }
 })
 
